@@ -52,6 +52,14 @@
         #buttonGroup button {
             flex: 1;
         }
+        #fontSizeControls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        #fontSizeControls button {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -60,10 +68,17 @@
     <textarea id="textInput" placeholder="지방쓰기 버전 0.1"></textarea>
     <div id="buttonGroup">
         <button id="submitButton">지방쓰기</button>
+        <button id="hanjaButton">한자변환</button>
+
+
+    </div>
+    <div id="fontSizeControls">
+        <button id="increaseFontButton">글자 키우기</button>
+        <button id="decreaseFontButton">글자 줄이기</button>
         <button id="newlineButton">줄바꿈</button>
-        <button id="hanjaButton">한자변환</button> <!-- 새로 추가된 버튼 -->
     </div>
     <button id="clearButton">지방태우기</button>
+
 </div>
 
 <script>
@@ -73,11 +88,24 @@
     const clearButton = document.getElementById('clearButton');
     const displayArea = document.getElementById('displayArea');
     const hanjaButton = document.getElementById('hanjaButton');
+    const increaseFontButton = document.getElementById('increaseFontButton');
+    const decreaseFontButton = document.getElementById('decreaseFontButton');
+
+    let currentFontSize = 5; // 현재 글자 크기 (vw 단위)
 
     submitButton.addEventListener('click', () => {
         const text = textInput.value;
+        displayArea.textContent = '';
+
         if (text.trim() !== '') {
-            displayArea.textContent = text;
+            let index = 0;
+            const typingEffect = setInterval(() => {
+                if (index < text.length) {
+                    displayArea.textContent += text[index++];
+                } else {
+                    clearInterval(typingEffect);
+                }
+            }, 100); // 글자 딜레이
         } else {
             displayArea.textContent = '지방쓰기 버전 0.1';
         }
@@ -92,8 +120,11 @@
     });
 
     clearButton.addEventListener('click', () => {
+        if (clearButton.disabled) return;
+
         let count = 5;
         clearButton.textContent = count;
+        clearButton.disabled = true;
 
         const interval = setInterval(() => {
             count--;
@@ -102,6 +133,7 @@
             if (count === 0) {
                 clearInterval(interval);
                 clearButton.textContent = '지방태우기';
+                clearButton.disabled = false;
 
                 const burnEffect = document.createElement('div');
                 burnEffect.className = 'burn-effect';
@@ -123,11 +155,27 @@
         }
     });
 
-    // 한자변환 버튼 클릭 시 새창 열기
     hanjaButton.addEventListener('click', () => {
         const url = 'https://hanja.dict.naver.com/';
         window.open(url, '_blank');
     });
+
+    // 글자 키우기 버튼
+    increaseFontButton.addEventListener('click', () => {
+        if (currentFontSize < 20) { // 최대 글자 크기 제한
+            currentFontSize += 1;
+            displayArea.style.fontSize = `${currentFontSize}vw`;
+        }
+    });
+
+    // 글자 줄이기 버튼
+    decreaseFontButton.addEventListener('click', () => {
+        if (currentFontSize > 1) { // 최소 글자 크기 제한
+            currentFontSize -= 1;
+            displayArea.style.fontSize = `${currentFontSize}vw`;
+        }
+    });
 </script>
+
 </body>
 </html>

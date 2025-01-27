@@ -778,7 +778,6 @@
         '/assets/img/candle4.gif',
         '/assets/img/candle5.gif',
         '/assets/img/candle.gif',
-        '/assets/img/candle.gif',
     ];
 
 
@@ -818,7 +817,7 @@
         displayArea.textContent = ''; // 화면 초기화 후 다시 글자 추가
         let index = 0;
 
-        const randomImage = flameImages[Math.floor(Math.random() * flameImages.length)];
+        let randomImage = flameImages[Math.floor(Math.random() * flameImages.length)];
 
         const interval = setInterval(() => {
             if (index >= text.length) {

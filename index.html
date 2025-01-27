@@ -83,6 +83,64 @@
             }
         }
 
+
+        /* 모달 전체 화면 */
+        .modal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4); /* 반투명 배경 */
+        }
+
+        /* 모달 창 내부 콘텐츠 */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto; /* 중앙에 위치 */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px; /* 너비 설정 */
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 모달 닫기 버튼 */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        /* 관계 버튼 스타일 */
+        .relationOption {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .relationOption:hover {
+            background-color: #ddd;
+        }
+
+
     </style>
 </head>
 <body>
@@ -92,6 +150,7 @@
     <div id="buttonGroup">
         <button id="submitButton">지방쓰기</button>
         <button id="hanjaButton">한자변환</button>
+        <button id="relationButton">관계 선택</button>
 
 
     </div>
@@ -104,6 +163,33 @@
 
 </div>
 
+<!-- 관계 선택 모달 -->
+<div id="relationModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h3>관계를 선택하세요</h3>
+        <ul>
+            <li><button class="relationOption" data-text="顯考">아버지 현고(顯考)</button></li>
+            <li><button class="relationOption" data-text="顯妣">어머니 현비(顯妣)</button></li>
+            <li><button class="relationOption" data-text="顯祖考">조부 현조고(顯祖考)</button></li>
+            <li><button class="relationOption" data-text="顯祖妣">조모 현조비(顯祖妣)</button></li>
+            <li><button class="relationOption" data-text="顯曾祖考">증조부 현증조고(顯曾祖考)</button></li>
+            <li><button class="relationOption" data-text="顯曾祖妣">증조모 현증조비(顯曾祖妣)</button></li>
+            <li><button class="relationOption" data-text="顯高祖考">고조부 顯高祖考(현고조고)</button></li>
+            <li><button class="relationOption" data-text="顯高祖妣">고조모 顯高祖妣(현고조비)</button></li>
+            <li><button class="relationOption" data-text="顯辟">남편 현벽(顯辟)</button></li>
+            <li><button class="relationOption" data-text="亡室">아내 망실(亡室)</button></li>
+            <li><button class="relationOption" data-text="故室">아내 고실(故室)</button></li>
+            <li><button class="relationOption" data-text="故室">형 현형(顯兄)</button></li>
+            <li><button class="relationOption" data-text="亡弟">동생 망제(亡弟)</button></li>
+            <li><button class="relationOption" data-text="故弟">동생 고제(故弟)</button></li>
+            <li><button class="relationOption" data-text="亡子">자식 망자(亡子)</button></li>
+            <li><button class="relationOption" data-text="故子">자식 고자(故子)</button></li>
+        </ul>
+    </div>
+</div>
+
+
 <script>
     const textInput = document.getElementById('textInput');
     const submitButton = document.getElementById('submitButton');
@@ -113,6 +199,12 @@
     const hanjaButton = document.getElementById('hanjaButton');
     const increaseFontButton = document.getElementById('increaseFontButton');
     const decreaseFontButton = document.getElementById('decreaseFontButton');
+
+    const relationButton = document.getElementById('relationButton');
+    const modal = document.getElementById('relationModal');
+    const closeModal = document.getElementById('closeModal');
+    const relationOptions = document.querySelectorAll('.relationOption');
+
 
     let currentFontSize = 5; // 현재 글자 크기 (vw 단위)
 
@@ -205,6 +297,37 @@
             displayArea.style.fontSize = `${currentFontSize}vw`;
         }
     });
+
+
+    // 관계 선택 버튼 클릭 시 모달 열기
+    relationButton.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    // 모달 닫기 버튼 클릭 시 모달 닫기
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // 관계 옵션 클릭 시 동작
+    relationOptions.forEach(option => {
+        option.addEventListener('click', (event) => {
+            //const selectedRelation = event.target.textContent; // 선택된 관계 텍스트 가져오기
+            const selectedRelation = event.target.getAttribute('data-text'); // `data-text`
+            // `textInput` 필드에 선택된 텍스트 추가
+            textInput.value += selectedRelation + ' ';
+            modal.style.display = 'none'; // 모달 닫기
+            textInput.focus(); // 텍스트 필드에 포커스
+        });
+    });
+
+    // 화면의 어두운 영역 클릭 시 모달 닫기
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
 </script>
 
 </body>

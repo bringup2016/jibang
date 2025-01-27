@@ -710,8 +710,15 @@
     // 버튼 상태를 저장할 변수
     let isHidden = false;
 
-
-
+    const flameImages = [
+        '/assets/img/candle.gif',
+        '/assets/img/candle2.gif',
+        '/assets/img/candle3.gif',
+        '/assets/img/candle4.gif',
+        '/assets/img/candle5.gif',
+        '/assets/img/candle.gif',
+        '/assets/img/candle.gif',
+    ];
 
 
     let currentFontSize = 5; // 현재 글자 크기 (vw 단위)
@@ -750,6 +757,8 @@
         displayArea.textContent = ''; // 화면 초기화 후 다시 글자 추가
         let index = 0;
 
+        const randomImage = flameImages[Math.floor(Math.random() * flameImages.length)];
+
         const interval = setInterval(() => {
             if (index >= text.length) {
                 clearInterval(interval); // 모든 글자 삭제 후 멈춤
@@ -760,12 +769,16 @@
             // 화면의 글자를 하나씩 지우기
             displayArea.textContent = text.slice(index + 1);
 
+            // 랜덤 불꽃 이미지 선택
+
+
             // 불꽃 애니메이션 추가
             const flame = document.createElement('div');
             flame.className = 'flame';
-            flame.style.left = `${Math.random() * 80}%`; // 불꽃 위치를 화면 가운데로 조절
             flame.style.width = '40vw'; // 불꽃 크기
             flame.style.height = '40vw';
+            flame.style.left = `${Math.random() * 80}%`; // 불꽃 위치를 랜덤으로 조정
+            flame.style.backgroundImage = `url('${randomImage}')`;
 
             displayArea.appendChild(flame); // 불꽃을 화면에 추가
 
@@ -777,6 +790,7 @@
             index++;
         }, 200); // 글자를 200ms 간격으로 순차적으로 지움
     });
+
 
     textInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter' && !event.shiftKey) {

@@ -13,6 +13,67 @@
             height: 100vh;
         }
 
+
+        /* 공통 버튼 스타일 */
+        #inputArea button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background-color: #007bff; /* 버튼 기본 색상 (파란색) */
+            border: none;
+            border-radius: 8px; /* 둥근 모서리 */
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 은은한 그림자 */
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s; /* 부드러운 전환 */
+        }
+
+        /* 버튼 hover 효과 */
+        #inputArea button:hover {
+            background-color: #0056b3; /* hover 시 더 진한 파란색 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* hover 시 그림자 강조 */
+        }
+
+        /* 버튼 클릭(active) 효과 */
+        #inputArea button:active {
+            transform: scale(0.98); /* 클릭 시 살짝 눌리는 효과 */
+            background-color: #00408a; /* 클릭 시 더 짙은 파란색 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 축소 */
+        }
+
+        /* 버튼 그룹 스타일 */
+        .buttonGroup {
+            display: flex;
+            gap: 10px; /* 버튼 간격 */
+            margin-top: 10px;
+            justify-content: center; /* 버튼 가운데 정렬 */
+        }
+
+        .buttonGroup button {
+            flex: 1; /* 동일한 비율로 버튼 너비 분배 */
+        }
+
+        /* 버튼 색상 변형 - 특정 버튼에 색상 차별화 가능 */
+        #clearButton {
+            background-color: #dc3545; /* 빨간색 */
+        }
+
+        #clearButton:hover {
+            background-color: #b52a37; /* hover 시 더 짙은 빨간색 */
+        }
+
+        #relationButton {
+            background-color: #28a745; /* 녹색 */
+        }
+
+        #relationButton:hover {
+            background-color: #1e7e34; /* hover 시 더 짙은 녹색 */
+        }
+
+        /* 기타 버튼 공통 스타일은 상속 */
+
+
+
         #displayArea {
             flex: 1;
             display: flex;

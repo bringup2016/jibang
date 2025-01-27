@@ -44,12 +44,12 @@
             font-size: 16px;
             cursor: pointer;
         }
-        #buttonGroup {
+        .buttonGroup {
             display: flex;
             gap: 10px;
             margin-top: 10px;
         }
-        #buttonGroup button {
+        .buttonGroup button {
             flex: 1;
         }
         #fontSizeControls {
@@ -147,12 +147,13 @@
 <div id="displayArea">Write something...</div>
 <div id="inputArea">
     <textarea id="textInput" placeholder="지방쓰기 버전 0.1"></textarea>
-    <div id="buttonGroup">
+    <div class="buttonGroup">
         <button id="submitButton">지방쓰기</button>
         <button id="hanjaButton">한자변환</button>
-        <button id="relationButton">관계 선택</button>
-
-
+    </div>
+    <div class="buttonGroup">
+        <button id="relationButton">1. 관계 선택</button>
+        <button id="positionButton">2. 직위 선택</button>
     </div>
     <div id="fontSizeControls">
         <button id="increaseFontButton">글자 키우기</button>
@@ -175,8 +176,8 @@
             <li><button class="relationOption" data-text="顯祖妣">조모 현조비(顯祖妣)</button></li>
             <li><button class="relationOption" data-text="顯曾祖考">증조부 현증조고(顯曾祖考)</button></li>
             <li><button class="relationOption" data-text="顯曾祖妣">증조모 현증조비(顯曾祖妣)</button></li>
-            <li><button class="relationOption" data-text="顯高祖考">고조부 顯高祖考(현고조고)</button></li>
-            <li><button class="relationOption" data-text="顯高祖妣">고조모 顯高祖妣(현고조비)</button></li>
+            <li><button class="relationOption" data-text="顯高祖考">고조부 현고조고(顯高祖考)</button></li>
+            <li><button class="relationOption" data-text="顯高祖妣">고조모 현고조비(顯高祖妣)</button></li>
             <li><button class="relationOption" data-text="顯辟">남편 현벽(顯辟)</button></li>
             <li><button class="relationOption" data-text="亡室">아내 망실(亡室)</button></li>
             <li><button class="relationOption" data-text="故室">아내 고실(故室)</button></li>
@@ -188,6 +189,8 @@
         </ul>
     </div>
 </div>
+
+
 
 
 <script>

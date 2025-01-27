@@ -539,7 +539,7 @@
 </div>
 
 
-<div id="eyeButton" class="floatingButton">&#128065;</div> <!-- 눈 아이콘 -->
+<div id="eyeButton" class="floatingButton">🙈</div> <!-- 눈 아이콘 -->
 
 
 <script>
@@ -618,7 +618,7 @@
                 }
             }, 100); // 글자 딜레이
         } else {
-            displayArea.textContent = '지방쓰기 버전 0.1';
+            displayArea.innerHTML = `예시, 관계, 직위를 참고해서 <br> 지방을 작성해주세요.`;
         }
         textInput.value = '';
     });
@@ -879,8 +879,6 @@
             programInfoModal.style.display = 'none';
         }
     });
-
-
 
     // eyeButton 클릭 이벤트 추가
     eyeButton.addEventListener('click', () => {

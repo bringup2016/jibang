@@ -12,6 +12,7 @@
             flex-direction: column;
             height: 100vh;
         }
+
         #displayArea {
             flex: 1;
             display: flex;
@@ -25,12 +26,14 @@
             word-wrap: break-word;
             position: relative;
         }
+
         #inputArea {
             display: flex;
             flex-direction: column;
             padding: 10px;
             border-top: 1px solid #ccc;
         }
+
         #inputArea textarea {
             flex: 1;
             padding: 10px;
@@ -38,28 +41,34 @@
             resize: none;
             height: 100px;
         }
+
         #inputArea button {
             margin-top: 10px;
             padding: 10px;
             font-size: 16px;
             cursor: pointer;
         }
+
         .buttonGroup {
             display: flex;
             gap: 10px;
             margin-top: 10px;
         }
+
         .buttonGroup button {
             flex: 1;
         }
+
         #fontSizeControls {
             display: flex;
             gap: 10px;
             margin-top: 10px;
         }
+
         #fontSizeControls button {
             flex: 1;
         }
+
         .flame {
             position: absolute;
             bottom: 0;
@@ -141,6 +150,23 @@
         }
 
 
+        /* 직위 버튼 스타일 */
+        .positionOption {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .positionOption:hover {
+            background-color: #ddd;
+        }
+
+
     </style>
 </head>
 <body>
@@ -170,26 +196,99 @@
         <span id="closeModal" class="close">&times;</span>
         <h3>관계를 선택하세요</h3>
         <ul>
-            <li><button class="relationOption" data-text="顯考">아버지 현고(顯考)</button></li>
-            <li><button class="relationOption" data-text="顯妣">어머니 현비(顯妣)</button></li>
-            <li><button class="relationOption" data-text="顯祖考">조부 현조고(顯祖考)</button></li>
-            <li><button class="relationOption" data-text="顯祖妣">조모 현조비(顯祖妣)</button></li>
-            <li><button class="relationOption" data-text="顯曾祖考">증조부 현증조고(顯曾祖考)</button></li>
-            <li><button class="relationOption" data-text="顯曾祖妣">증조모 현증조비(顯曾祖妣)</button></li>
-            <li><button class="relationOption" data-text="顯高祖考">고조부 현고조고(顯高祖考)</button></li>
-            <li><button class="relationOption" data-text="顯高祖妣">고조모 현고조비(顯高祖妣)</button></li>
-            <li><button class="relationOption" data-text="顯辟">남편 현벽(顯辟)</button></li>
-            <li><button class="relationOption" data-text="亡室">아내 망실(亡室)</button></li>
-            <li><button class="relationOption" data-text="故室">아내 고실(故室)</button></li>
-            <li><button class="relationOption" data-text="故室">형 현형(顯兄)</button></li>
-            <li><button class="relationOption" data-text="亡弟">동생 망제(亡弟)</button></li>
-            <li><button class="relationOption" data-text="故弟">동생 고제(故弟)</button></li>
-            <li><button class="relationOption" data-text="亡子">자식 망자(亡子)</button></li>
-            <li><button class="relationOption" data-text="故子">자식 고자(故子)</button></li>
+            <li>
+                <button class="relationOption" data-text="顯考">아버지 현고(顯考)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯妣">어머니 현비(顯妣)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯祖考">조부 현조고(顯祖考)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯祖妣">조모 현조비(顯祖妣)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯曾祖考">증조부 현증조고(顯曾祖考)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯曾祖妣">증조모 현증조비(顯曾祖妣)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯高祖考">고조부 현고조고(顯高祖考)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯高祖妣">고조모 현고조비(顯高祖妣)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="顯辟">남편 현벽(顯辟)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="亡室">아내 망실(亡室)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="故室">아내 고실(故室)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="故室">형 현형(顯兄)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="亡弟">동생 망제(亡弟)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="故弟">동생 고제(故弟)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="亡子">자식 망자(亡子)</button>
+            </li>
+            <li>
+                <button class="relationOption" data-text="故子">자식 고자(故子)</button>
+            </li>
         </ul>
     </div>
 </div>
 
+<!-- 직위 선택 모달 -->
+<div id="positionModal" class="modal">
+    <div class="modal-content">
+        <span id="closePositionModal" class="close">&times;</span>
+        <h3>직위를 선택하세요</h3>
+        <button id="infoButtonPosition" style="margin-bottom: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">정보</button>
+        <ul>
+            <li>
+                <button class="positionOption" data-text="學生">學生(학생)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="府君">府君(부군)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="貞敬夫人">貞敬夫人(정경부인)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="貞夫人">貞夫人(정부인)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="淑夫人">淑夫人(숙부인)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="孺人">孺人(유인)</button>
+            </li>
+            <li>
+                <button class="positionOption" data-text="神位">신위(神位)</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- 정보 팝업 모달 -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span id="closeInfoModal" class="close">&times;</span>
+        <p id="infoTextContents">
+        </p>
+    </div>
+</div>
 
 
 
@@ -203,10 +302,24 @@
     const increaseFontButton = document.getElementById('increaseFontButton');
     const decreaseFontButton = document.getElementById('decreaseFontButton');
 
+    //관계
     const relationButton = document.getElementById('relationButton');
     const modal = document.getElementById('relationModal');
     const closeModal = document.getElementById('closeModal');
     const relationOptions = document.querySelectorAll('.relationOption');
+
+    //직위
+    const positionButton = document.getElementById('positionButton');
+    const positionModal = document.getElementById('positionModal');
+    const closePositionModal = document.getElementById('closePositionModal');
+    const positionOptions = document.querySelectorAll('.positionOption');
+
+    //정보
+    // const infoButton = document.getElementById('infoButton');
+    const infoButtonPosition = document.getElementById('infoButtonPosition');
+    const infoModal = document.getElementById('infoModal');
+    const closeInfoModal = document.getElementById('closeInfoModal');
+
 
 
     let currentFontSize = 5; // 현재 글자 크기 (vw 단위)
@@ -301,6 +414,7 @@
         }
     });
 
+    //// 모달 관련 코드
 
     // 관계 선택 버튼 클릭 시 모달 열기
     relationButton.addEventListener('click', () => {
@@ -330,6 +444,64 @@
             modal.style.display = 'none';
         }
     });
+
+    positionButton.addEventListener('click', () => {
+        positionModal.style.display = 'block';
+    });
+
+    closePositionModal.addEventListener('click', () => {
+        positionModal.style.display = 'none';
+    });
+
+    positionOptions.forEach(option => {
+        option.addEventListener('click', (event) => {
+            const selectedPosition = event.target.getAttribute('data-text');
+            textInput.value += selectedPosition + ' ';
+            positionModal.style.display = 'none';
+            textInput.focus();
+        });
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === positionModal) {
+            positionModal.style.display = 'none';
+        }
+    });
+
+
+    // "정보" 버튼 클릭 시 팝업 열기
+    infoButtonPosition.addEventListener('click', () => {
+        const infoTextContents = document.getElementById('infoTextContents');
+        infoTextContents.innerHTML = `1. 고인의 직위와 이름
+            남자 조상이 벼슬을 한 경우에는 벼슬의 이름을 써주고, 벼슬을 안 한 경우에는 ‘學生(학생)’이라고 쓴다. <br>
+            ‘學生(학생)’은 본래 관직이 없거나 과거시험을 준비하는 경우를 뜻하는데, 다만 과거제도가 없는 현대에는 특별한
+            변형 없이 고인이 남성이라면 모두 '學生(학생)'으로 적는다. 그 다음에는 ‘府君(부군)’이라고 쓴다. <br><br>
+
+            여자 조상은 남편의 벼슬 급에 따라 나라로부터 부여 받은 貞敬夫人(정경부인)·貞夫人(정부인)·淑夫人(숙부인)
+            등의 호칭을 쓰면 되는데, 일정한 봉작이 없다면 ‘孺人(유인)’이라 적는다. 그 다음에 고인의 이름을 쓰는 부분에는
+            본관과 성씨(예. 김해 김씨)를 적는다.<br>
+            <br><br>
+            2. 신위(神位)<br>
+
+            지방의 맨끝에는 공통적으로 '신위(神位)'라고 써야 한다. 여기서 신위는 제사를 지내는 주인공이 위치할 곳이라는 뜻이다.<br>
+            <br><br><br>
+            <a href="https://terms.naver.com/entry.naver?docId=5952402&cid=43667&categoryId=43667" target="_blank"> [네이버 지식백과] 지방 쓰는 법 (시사상식사전, pmg 지식엔진연구소) </a>`;
+        infoModal.style.display = 'block';
+    });
+
+    // 정보 팝업 닫기 버튼 클릭 시 팝업 닫기
+    closeInfoModal.addEventListener('click', () => {
+        infoModal.style.display = 'none';
+    });
+
+    // 화면의 어두운 영역 클릭 시 정보 팝업 닫기
+    window.addEventListener('click', (event) => {
+        if (event.target === infoModal) {
+            infoModal.style.display = 'none';
+        }
+    });
+
+
 
 </script>
 

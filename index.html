@@ -25,25 +25,6 @@
             word-wrap: break-word;
             position: relative;
         }
-        .burn-effect {
-            position: absolute;
-            animation: burn 2s forwards;
-            color: red;
-        }
-        @keyframes burn {
-            0% {
-                clip-path: inset(100% 0 0 0);
-                opacity: 1;
-            }
-            50% {
-                clip-path: inset(50% 0 0 0);
-                opacity: 0.7;
-            }
-            100% {
-                clip-path: inset(0 0 0 0);
-                opacity: 0;
-            }
-        }
         #inputArea {
             display: flex;
             flex-direction: column;
@@ -71,82 +52,82 @@
         #buttonGroup button {
             flex: 1;
         }
-        #countdown {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 16px;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-    <div id="displayArea">Write something...</div>
-    <div id="inputArea">
-        <textarea id="textInput" placeholder="Enter text here"></textarea>
-        <div id="buttonGroup">
-            <button id="submitButton">Submit</button>
-            <button id="newlineButton">줄바꿈</button>
-        </div>
-        <button id="clearButton">지방태우기</button>
-        <span id="countdown"></span>
+<div id="displayArea">Write something...</div>
+<div id="inputArea">
+    <textarea id="textInput" placeholder="지방쓰기 버전 0.1"></textarea>
+    <div id="buttonGroup">
+        <button id="submitButton">지방쓰기</button>
+        <button id="newlineButton">줄바꿈</button>
+        <button id="hanjaButton">한자변환</button> <!-- 새로 추가된 버튼 -->
     </div>
+    <button id="clearButton">지방태우기</button>
+</div>
 
-    <script>
-        const textInput = document.getElementById('textInput');
-        const submitButton = document.getElementById('submitButton');
-        const newlineButton = document.getElementById('newlineButton');
-        const clearButton = document.getElementById('clearButton');
-        const displayArea = document.getElementById('displayArea');
-        const countdown = document.getElementById('countdown');
+<script>
+    const textInput = document.getElementById('textInput');
+    const submitButton = document.getElementById('submitButton');
+    const newlineButton = document.getElementById('newlineButton');
+    const clearButton = document.getElementById('clearButton');
+    const displayArea = document.getElementById('displayArea');
+    const hanjaButton = document.getElementById('hanjaButton');
 
-        submitButton.addEventListener('click', () => {
-            const text = textInput.value;
-            if (text.trim() !== '') {
-                displayArea.textContent = text;
-            } else {
-                displayArea.textContent = 'Write something...';
+    submitButton.addEventListener('click', () => {
+        const text = textInput.value;
+        if (text.trim() !== '') {
+            displayArea.textContent = text;
+        } else {
+            displayArea.textContent = '지방쓰기 버전 0.1';
+        }
+        textInput.value = '';
+    });
+
+    newlineButton.addEventListener('click', () => {
+        const currentText = textInput.value;
+        textInput.value = currentText + '\n';
+        textInput.focus();
+        textInput.selectionStart = textInput.selectionEnd = textInput.value.length;
+    });
+
+    clearButton.addEventListener('click', () => {
+        let count = 5;
+        clearButton.textContent = count;
+
+        const interval = setInterval(() => {
+            count--;
+            clearButton.textContent = count;
+
+            if (count === 0) {
+                clearInterval(interval);
+                clearButton.textContent = '지방태우기';
+
+                const burnEffect = document.createElement('div');
+                burnEffect.className = 'burn-effect';
+                burnEffect.textContent = displayArea.textContent;
+                displayArea.textContent = '';
+                displayArea.appendChild(burnEffect);
+
+                setTimeout(() => {
+                    displayArea.removeChild(burnEffect);
+                }, 2000);
             }
-            textInput.value = '';
-        });
+        }, 1000);
+    });
 
-        newlineButton.addEventListener('click', () => {
-            const currentText = textInput.value;
-            textInput.value = currentText + '\n';
-            textInput.focus();
-            textInput.selectionStart = textInput.selectionEnd = textInput.value.length;
-        });
+    textInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            submitButton.click();
+        }
+    });
 
-        clearButton.addEventListener('click', () => {
-            let count = 5;
-            countdown.textContent = count;
-
-            const interval = setInterval(() => {
-                count--;
-                countdown.textContent = count;
-
-                if (count === 0) {
-                    clearInterval(interval);
-                    countdown.textContent = '';
-
-                    const burnEffect = document.createElement('div');
-                    burnEffect.className = 'burn-effect';
-                    burnEffect.textContent = displayArea.textContent;
-                    displayArea.textContent = '';
-                    displayArea.appendChild(burnEffect);
-
-                    setTimeout(() => {
-                        displayArea.removeChild(burnEffect);
-                    }, 2000);
-                }
-            }, 1000);
-        });
-
-        textInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                submitButton.click();
-            }
-        });
-    </script>
+    // 한자변환 버튼 클릭 시 새창 열기
+    hanjaButton.addEventListener('click', () => {
+        const url = 'https://hanja.dict.naver.com/';
+        window.open(url, '_blank');
+    });
+</script>
 </body>
 </html>

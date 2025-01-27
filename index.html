@@ -171,7 +171,7 @@
         #floatButton {
             position: fixed; /* 화면에 고정 */
             top: 20px; /* 화면 상단에서 20px 아래 */
-            right: 20px; /* 화면 오른쪽에서 20px 안쪽 */
+            right: 80px; /* 화면 오른쪽에서 20px 안쪽 */
             width: 50px;
             height: 50px;
             background-color: #007bff;
@@ -196,7 +196,7 @@
         #eyeButton {
             position: fixed;
             top: 20px;
-            right: 80px; /* 'i' 버튼 옆으로 배치 */
+            right: 20px; /* 'i' 버튼 옆으로 배치 */
             width: 50px;
             height: 50px;
             background-color: #28a745; /* 녹색 */
@@ -545,9 +545,6 @@
 </div>
 
 
-<!-- 우측 상단 떠다니는 안내 버튼 -->
-<div id="floatButton" class="floatingButton">i</div>
-
 <!-- 프로그램 소개 및 깃헙 링크 팝업 -->
 <div id="programInfoModal" class="modal">
     <div class="modal-content">
@@ -580,6 +577,9 @@
 
 
 <div id="eyeButton" class="floatingButton">🙈</div> <!-- 눈 아이콘 -->
+<div id="floatButton" class="floatingButton">i</div><!-- 우측 상단 떠다니는 안내 버튼 -->
+
+
 
 
 <!--<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka" crossorigin="anonymous"></script>-->
@@ -933,10 +933,14 @@
         if (isHidden) {
             // 버튼 보이기
             inputArea.style.display = 'flex';
+            floatButton.style.display = 'flex'; // i 버튼 보이기
+
             eyeButton.textContent = '🙈️'; // 눈 뜬 아이콘 표시
         } else {
             // 버튼 숨기기
             inputArea.style.display = 'none';
+            floatButton.style.display = 'none'; // i 버튼 숨기기
+
             eyeButton.textContent = '📝'; // 눈 감은 아이콘 표시
         }
         // 상태 반전

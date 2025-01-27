@@ -240,6 +240,63 @@
         }
 
 
+        .copy_btn {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .copy_btn button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            gap: 5px;
+        }
+
+        .copy_btn img {
+            width: 20px; /* 복사 아이콘 크기 */
+            height: 20px;
+        }
+
+        /* 카카오톡 공유와 주소 복사 버튼 컨테이너 스타일 - 좌우 배치 */
+        .programInfoModalContent > div {
+            display: flex; /* 플렉스 박스 설정 */
+            justify-content: space-between; /* 버튼을 양쪽 끝으로 배치 */
+            align-items: center; /* 세로 가운데 정렬 */
+            gap: 20px; /* 간격 */
+            margin-top: 20px; /* 위쪽 여백 */
+        }
+
+        .kakao_btn, .copy_btn { /* 카카오톡 공유 및 복사 버튼 공통 스타일 */
+            display: block;
+            flex: 1; /* 동일한 비율로 버튼의 너비 차지 */
+            text-align: center;
+            padding: 12px 16px;
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px; /* 둥근 모서리 */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .kakao_btn:hover, .copy_btn:hover {
+            background-color: #e6e6e6; /* 버튼 hover 효과 */
+        }
+
+        .kakao_btn img, .copy_btn img {
+            width: 20px;
+            height: 20px;
+        }
 
 
     </style>
@@ -555,12 +612,19 @@
             사용자가 텍스트 입력, 한자 변환, 예시 선택 등을 통해 효율적으로 지방을 작성할 수 있도록 설계되었습니다.<br><br>
             문의 사항이나 개선점이 있다면 언제든지 연락 부탁드립니다. 감사합니다.<br>
         </p>
-            <a href="javascript:shareMessage()">
-                <button type="button" class="kakao_btn">
-                    <img src="/assets/img/kakao.png" alt="카카오톡 공유">
-                    <p>카카오톡 공유</p>
-                </button>
+        <!-- 카카오톡 공유와 주소 복사 버튼 -->
+        <div style="text-align: center">
+            <a href="javascript:shareMessage()" class="kakao_btn">
+                <img src="/assets/img/kakao.png" alt="카카오톡 공유">
+                <span>카카오톡 공유</span>
             </a>
+
+            <a href="javascript:void(0)" onclick="copyToClipboard()" class="copy_btn">
+                <img src="https://img.icons8.com/ios/50/000000/copy.png" alt="주소 복사">
+                <span>주소 복사</span>
+            </a>
+        </div>
+
 
         <a href="https://www.instagram.com/dev_yan09" target="_blank" class="instagram_btn">
             <button type="button">
@@ -987,6 +1051,23 @@
             installTalk: true,
         });
     }
+
+    function copyToClipboard() {
+        // 현재 페이지 주소 얻기
+        const currentURL = window.location.href;
+
+        // 텍스트 복사를 위한 임시 텍스트 영역 생성
+        const tempInput = document.createElement('input');
+        tempInput.value = currentURL; // URL 값을 삽입
+        document.body.appendChild(tempInput); // 임시 텍스트 영역을 body에 추가
+        tempInput.select(); // 텍스트를 선택
+        document.execCommand('copy'); // 복사 실행
+        document.body.removeChild(tempInput); // 임시 텍스트 영역 삭제
+
+        // 알림 메시지 출력
+        alert('주소가 복사되었습니다! ✨');
+    }
+
 
 
 

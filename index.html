@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Text Display</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #displayArea {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 5vw;
+            white-space: pre;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            word-wrap: break-word;
+            position: relative;
+        }
+        .burn-effect {
+            position: absolute;
+            animation: burn 2s forwards;
+            color: red;
+        }
+        @keyframes burn {
+            0% {
+                clip-path: inset(100% 0 0 0);
+                opacity: 1;
+            }
+            50% {
+                clip-path: inset(50% 0 0 0);
+                opacity: 0.7;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                opacity: 0;
+            }
+        }
+        #inputArea {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        #inputArea textarea {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            resize: none;
+            height: 100px;
+        }
+        #inputArea button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #buttonGroup {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        #buttonGroup button {
+            flex: 1;
+        }
+        #countdown {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="displayArea">Write something...</div>
+    <div id="inputArea">
+        <textarea id="textInput" placeholder="Enter text here"></textarea>
+        <div id="buttonGroup">
+            <button id="submitButton">Submit</button>
+            <button id="newlineButton">줄바꿈</button>
+        </div>
+        <button id="clearButton">지방태우기</button>
+        <span id="countdown"></span>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        const submitButton = document.getElementById('submitButton');
+        const newlineButton = document.getElementById('newlineButton');
+        const clearButton = document.getElementById('clearButton');
+        const displayArea = document.getElementById('displayArea');
+        const countdown = document.getElementById('countdown');
+
+        submitButton.addEventListener('click', () => {
+            const text = textInput.value;
+            if (text.trim() !== '') {
+                displayArea.textContent = text;
+            } else {
+                displayArea.textContent = 'Write something...';
+            }
+            textInput.value = '';
+        });
+
+        newlineButton.addEventListener('click', () => {
+            const currentText = textInput.value;
+            textInput.value = currentText + '\n';
+            textInput.focus();
+            textInput.selectionStart = textInput.selectionEnd = textInput.value.length;
+        });
+
+        clearButton.addEventListener('click', () => {
+            let count = 5;
+            countdown.textContent = count;
+
+            const interval = setInterval(() => {
+                count--;
+                countdown.textContent = count;
+
+                if (count === 0) {
+                    clearInterval(interval);
+                    countdown.textContent = '';
+
+                    const burnEffect = document.createElement('div');
+                    burnEffect.className = 'burn-effect';
+                    burnEffect.textContent = displayArea.textContent;
+                    displayArea.textContent = '';
+                    displayArea.appendChild(burnEffect);
+
+                    setTimeout(() => {
+                        displayArea.removeChild(burnEffect);
+                    }, 2000);
+                }
+            }, 1000);
+        });
+
+        textInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                submitButton.click();
+            }
+        });
+    </script>
+</body>
+</html>

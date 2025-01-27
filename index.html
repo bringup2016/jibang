@@ -832,9 +832,13 @@
     clearButton.addEventListener('click', () => {
         clearButton.disabled = true;
 
+        eyeButtonClickFn();
+
         const text = displayArea.textContent; // 현재 화면의 글자
         displayArea.textContent = ''; // 화면 초기화 후 다시 글자 추가
         let index = 0;
+
+
 
         let randomImage = flameImages[Math.floor(Math.random() * flameImages.length)];
 
@@ -1087,6 +1091,10 @@
 
     // eyeButton 클릭 이벤트 추가
     eyeButton.addEventListener('click', () => {
+        eyeButtonClickFn();
+    });
+
+    function eyeButtonClickFn() {
         if (isHidden) {
             // 버튼 보이기
             inputArea.style.display = 'flex';
@@ -1102,7 +1110,7 @@
         }
         // 상태 반전
         isHidden = !isHidden;
-    });
+    }
 
     function shareMessage() {
         // 현재 링크 가져오기

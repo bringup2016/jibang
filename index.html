@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertical Text Display</title>
+    <title>제사 지방 쓰기</title>
     <style>
         body {
             margin: 0;
@@ -178,8 +178,11 @@
         <button id="hanjaButton">한자변환</button>
     </div>
     <div class="buttonGroup">
+        <button id="exampleButton">예시</button>
+        <button id="nameButton">성씨 본관</button>
         <button id="relationButton">1. 관계 선택</button>
         <button id="positionButton">2. 직위 선택</button>
+
     </div>
     <div id="fontSizeControls">
         <button id="increaseFontButton">글자 키우기</button>
@@ -282,6 +285,176 @@
 </div>
 
 
+<!-- 성씨 보관 선택 모달 -->
+<div id="nameModal" class="modal">
+    <div class="modal-content">
+        <span id="closeNameModal" class="close">&times;</span>
+        <h3>주요 성씨와 본관 목록입니다. </h3>
+        <button id="infoButtonName" style="margin-bottom: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">정보</button>
+        <ul>
+            <!-- 김(金) -->
+            <li>
+                <button class="nameOption" data-text="金海 金">김해 김(金海 金)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="慶州 金">경주 김(慶州 金)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="光山 金">광산 김(光山 金)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="安東 金">안동 김(安東 金)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="義城 金">의성 김(義城 金)</button>
+            </li>
+
+            <!-- 이(李) -->
+            <li>
+                <button class="nameOption" data-text="全州 李">전주 이(全州 李)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="慶州 李">경주 이(慶州 李)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="延安 李">연안 이(延安 李)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="光州 李">광주 이(廣州 李)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="固城 李">고성 이(固城 李)</button>
+            </li>
+
+            <!-- 박(朴) -->
+            <li>
+                <button class="nameOption" data-text="密陽 朴">밀양 박(密陽 朴)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="咸陽 朴">함양 박(咸陽 朴)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="高靈 朴">고령 박(高靈 朴)</button>
+            </li>
+
+            <!-- 정(鄭) -->
+            <li>
+                <button class="nameOption" data-text="晋州 鄭">진주 정(晉州 鄭)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="東萊 鄭">동래 정(東萊 鄭)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="河東 鄭">하동 정(河東 鄭)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="溫陽 鄭">온양 정(溫陽 鄭)</button>
+            </li>
+
+            <!-- 최(崔) -->
+            <li>
+                <button class="nameOption" data-text="慶州 崔">경주 최(慶州 崔)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="全州 崔">전주 최(全州 崔)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="朔寧 崔">삭녕 최(朔寧 崔)</button>
+            </li>
+
+            <!-- 윤(尹) -->
+            <li>
+                <button class="nameOption" data-text="坡平 尹">파평 윤(坡平 尹)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="海平 尹">해평 윤(海平 尹)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="南原 尹">남원 윤(南原 尹)</button>
+            </li>
+
+            <!-- 장(張) -->
+            <li>
+                <button class="nameOption" data-text="德水 張">덕수 장(德水 張)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="仁同 張">인동 장(仁同 張)</button>
+            </li>
+
+            <!-- 임/림(林) -->
+            <li>
+                <button class="nameOption" data-text="羅州 林">나주 임(羅州 林)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="平澤 林">평택 임(平澤 林)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="長興 林">장흥 임(長興 林)</button>
+            </li>
+
+            <!-- 강(姜) -->
+            <li>
+                <button class="nameOption" data-text="晋州 姜">진주 강(晉州 姜)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="平壤 姜">평양 강(平壤 姜)</button>
+            </li>
+
+            <!-- 홍(洪) -->
+            <li>
+                <button class="nameOption" data-text="南陽 洪">남양 홍(南陽 洪)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="豊山 洪">풍산 홍(豊山 洪)</button>
+            </li>
+
+            <!-- 허(許) -->
+            <li>
+                <button class="nameOption" data-text="金海 許">김해 허(金海 許)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="陽川 許">양천 허(陽川 許)</button>
+            </li>
+
+            <!-- 고(高) -->
+            <li>
+                <button class="nameOption" data-text="濟州 高">제주 고(濟州 高)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="長興 高">장흥 고(長興 高)</button>
+            </li>
+
+            <!-- 하(河) -->
+            <li>
+                <button class="nameOption" data-text="晉州 河">진주 하(晉州 河)</button>
+            </li>
+            <li>
+                <button class="nameOption" data-text="全州 河">전주 하(全州 河)</button>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<!-- 예시 선택 모달 -->
+<div id="exampleModal" class="modal">
+    <div class="modal-content">
+        <span id="closeExampleModal" class="close">&times;</span>
+        <h3>예시를 선택하세요</h3>
+        <button id="infoButtonExample" style="margin-bottom: 10px; padding: 5px 10px; font-size: 14px; cursor: pointer;">정보</button>
+        <ul>
+            <li>
+                <button class="exampleOption" data-text="顯考學生府君神位">顯考學生府君神位(현고학생부군신위) 아버지</button>
+            </li>
+            <li>
+                <button class="exampleOption" data-text="顯妣孺人光山金氏神位">顯妣孺人光山金氏神位(현비유인광산김씨신위) 어머니</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
 <!-- 정보 팝업 모달 -->
 <div id="infoModal" class="modal">
     <div class="modal-content">
@@ -315,10 +488,24 @@
     const closePositionModal = document.getElementById('closePositionModal');
     const positionOptions = document.querySelectorAll('.positionOption');
 
+    //예시
+    const exampleButton = document.getElementById('exampleButton');
+    const exampleModal = document.getElementById('exampleModal');
+    const closeExampleModal = document.getElementById('closeExampleModal');
+    const exampleOption = document.querySelectorAll('.exampleOption');
+
+    //성씨
+    const nameButton = document.getElementById('nameButton');
+    const nameModal = document.getElementById('nameModal');
+    const closeNameModal = document.getElementById('closeNameModal');
+    const nameOption = document.querySelectorAll('.nameOption');
+
+
     //정보
     // const infoButton = document.getElementById('infoButton');
     const infoButtonPosition = document.getElementById('infoButtonPosition');
     const infoButtonRelation = document.getElementById('infoButtonRelation');
+    const infoButtonExample = document.getElementById('infoButtonExample');
     const infoModal = document.getElementById('infoModal');
     const closeInfoModal = document.getElementById('closeInfoModal');
 
@@ -416,7 +603,8 @@
         }
     });
 
-    //// 모달 관련 코드
+//// 모달 관련 코드
+    //-- 관계 모달 -- //
 
     // 관계 선택 버튼 클릭 시 모달 열기
     relationButton.addEventListener('click', () => {
@@ -447,6 +635,7 @@
         }
     });
 
+    //-- 직위 모달 -- //
     positionButton.addEventListener('click', () => {
         positionModal.style.display = 'block';
     });
@@ -469,6 +658,57 @@
             positionModal.style.display = 'none';
         }
     });
+
+    //-- 예시 모달 -- //
+    exampleButton.addEventListener('click', () => {
+        exampleModal.style.display = 'block';
+    });
+
+    closeExampleModal.addEventListener('click', () => {
+        exampleModal.style.display = 'none';
+    });
+
+    exampleOption.forEach(option => {
+        option.addEventListener('click', (event) => {
+            const selectedPosition = event.target.getAttribute('data-text');
+            textInput.value += selectedPosition + ' ';
+            exampleModal.style.display = 'none';
+            textInput.focus();
+        });
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === exampleModal) {
+            exampleModal.style.display = 'none';
+        }
+    });
+
+
+    //-- 성씨 모달 -- //
+    nameButton.addEventListener('click', () => {
+        nameModal.style.display = 'block';
+    });
+
+    closeNameModal.addEventListener('click', () => {
+        nameModal.style.display = 'none';
+    });
+
+    nameOption.forEach(option => {
+        option.addEventListener('click', (event) => {
+            const selectedPosition = event.target.getAttribute('data-text');
+            textInput.value += selectedPosition + ' ';
+            nameModal.style.display = 'none';
+            textInput.focus();
+        });
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === nameModal) {
+            nameModal.style.display = 'none';
+        }
+    });
+
+
 
 
     // "정보" 버튼 클릭 시 팝업 열기
@@ -496,6 +736,24 @@
         const infoTextContents = document.getElementById('infoTextContents');
         infoTextContents.innerHTML = `지방의 가장 윗부분에는 고인을 모신다는 뜻을 기리기 위해 ‘고인이여, 나타나십시오’라는 의미인
  ‘나타날 현(顯)’ 자를 쓴다. 다음으로 제사를 올리는 제주(祭主, 제사를 모시는 사람)와의 관계를 적는다.
+            <br><br><br>
+            <a href="https://terms.naver.com/entry.naver?docId=5952402&cid=43667&categoryId=43667" target="_blank"> [네이버 지식백과] 지방 쓰는 법 (시사상식사전, pmg 지식엔진연구소) </a>`;
+        infoModal.style.display = 'block';
+    });
+
+    // "정보" 버튼 클릭 시 팝업 열기
+    infoButtonExample.addEventListener('click', () => {
+        const infoTextContents = document.getElementById('infoTextContents');
+        infoTextContents.innerHTML = `모의 지방을 쓸 때 제주와의 관계를 적는 부분에서는 아버지를 왼쪽에 쓰고, 어머니를 오른쪽에 쓴다. <br>
+만약 한 분만 돌아가셨을 경우에는 돌아가신 분만 중앙에 쓴다. <br><br>
+
+아버지 지방의 경우 ‘顯考學生府君神位(현고학생부군신위)’라고 쓰는데 이때 顯(현)은 존경의 의미를 지니며 考(고)는 고인이 제주의 아버지임을 의미한다.<br>
+ 그 다음에 오는 ‘學生(학생)’은 본래 관직이 없거나 과거시험을 준비하는 경우를 뜻하는데, 다만 과거제도가 없는 현대에는 특별한 변형 없이 고인이
+ 남성이라면 모두 學生(학생)으로 적는다. 府君(부군)은 제사 대상이 남자일 경우 적는 것이며, 마지막에는 조상의 자리를 의미하는 神位(신위)를 적는다.<br><br>
+<br>
+어머니 지방의 경우 ‘顯妣孺人光山金氏神位(현비유인광산김씨신위)’이라고 적는데, 여기서 妣(비)는 돌아가신 어머니를 뜻한다.<br>
+ 여성의 경우 과거에는 정경부인(貞敬夫人) 등 봉작이 있다면 봉작을 적지만, 일정한 봉작이 없다면 孺人(유인)이라 적는다.<br>
+  그 다음에 고인의 이름을 쓰는 부분에는 본관과 성씨(예. 광산김씨)를 적는다. 그리고 마지막에는 조상의 자리를 의미하는 神位(신위)를 적는다.
             <br><br><br>
             <a href="https://terms.naver.com/entry.naver?docId=5952402&cid=43667&categoryId=43667" target="_blank"> [네이버 지식백과] 지방 쓰는 법 (시사상식사전, pmg 지식엔진연구소) </a>`;
         infoModal.style.display = 'block';

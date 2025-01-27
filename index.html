@@ -193,6 +193,30 @@
         }
 
 
+        #eyeButton {
+            position: fixed;
+            top: 20px;
+            right: 80px; /* 'i' 버튼 옆으로 배치 */
+            width: 50px;
+            height: 50px;
+            background-color: #28a745; /* 녹색 */
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #eyeButton:hover {
+            background-color: #1e7e34;
+        }
+
+
 
     </style>
 </head>
@@ -511,6 +535,7 @@
 </div>
 
 
+<div id="eyeButton" class="floatingButton">&#128065;</div> <!-- 눈 아이콘 -->
 
 
 <script>
@@ -560,6 +585,15 @@
     const floatButton = document.getElementById('floatButton'); // 우측 상단 안내 버튼
     const programInfoModal = document.getElementById('programInfoModal'); // 프로그램 소개 모달
     const closeProgramInfoModal = document.getElementById('closeProgramInfoModal'); // 모달 닫기 버튼
+
+    // 새로 만든 eyeButton을 가져옴
+    const eyeButton = document.getElementById('eyeButton');
+    // 숨기고자 하는 버튼 그룹
+    const inputArea = document.getElementById('inputArea');
+
+    // 버튼 상태를 저장할 변수
+    let isHidden = false;
+
 
 
 
@@ -843,6 +877,21 @@
     });
 
 
+
+    // eyeButton 클릭 이벤트 추가
+    eyeButton.addEventListener('click', () => {
+        if (isHidden) {
+            // 버튼 보이기
+            inputArea.style.display = 'flex';
+            eyeButton.textContent = '👁️'; // 눈 뜬 아이콘 표시
+        } else {
+            // 버튼 숨기기
+            inputArea.style.display = 'none';
+            eyeButton.textContent = '🙈'; // 눈 감은 아이콘 표시
+        }
+        // 상태 반전
+        isHidden = !isHidden;
+    });
 
 
 </script>

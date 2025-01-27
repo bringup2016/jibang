@@ -60,6 +60,29 @@
         #fontSizeControls button {
             flex: 1;
         }
+        .flame {
+            position: absolute;
+            bottom: 0;
+            width: 50px;
+            height: 50px;
+            background: url('/assets/img/candle.gif') no-repeat center center;
+            background-size: cover;
+            animation: moveUp 1s linear forwards; /* 불꽃이 위로 올라감 */
+            pointer-events: none; /* 마우스 이벤트 방해 안 함 */
+        }
+
+
+        @keyframes moveUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-300px); /* 화면 위로 이동 */
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -119,33 +142,40 @@
         textInput.selectionStart = textInput.selectionEnd = textInput.value.length;
     });
 
+    // 글자 지우기 및 불꽃 효과 추가
     clearButton.addEventListener('click', () => {
-        if (clearButton.disabled) return;
-
-        let count = 5;
-        clearButton.textContent = count;
         clearButton.disabled = true;
 
+        const text = displayArea.textContent; // 현재 화면의 글자
+        displayArea.textContent = ''; // 화면 초기화 후 다시 글자 추가
+        let index = 0;
+
         const interval = setInterval(() => {
-            count--;
-            clearButton.textContent = count;
-
-            if (count === 0) {
-                clearInterval(interval);
-                clearButton.textContent = '지방태우기';
+            if (index >= text.length) {
+                clearInterval(interval); // 모든 글자 삭제 후 멈춤
                 clearButton.disabled = false;
-
-                const burnEffect = document.createElement('div');
-                burnEffect.className = 'burn-effect';
-                burnEffect.textContent = displayArea.textContent;
-                displayArea.textContent = '';
-                displayArea.appendChild(burnEffect);
-
-                setTimeout(() => {
-                    displayArea.removeChild(burnEffect);
-                }, 2000);
+                return;
             }
-        }, 1000);
+
+            // 화면의 글자를 하나씩 지우기
+            displayArea.textContent = text.slice(index + 1);
+
+            // 불꽃 애니메이션 추가
+            const flame = document.createElement('div');
+            flame.className = 'flame';
+            flame.style.left = `${Math.random() * 80}%`; // 불꽃 위치를 화면 가운데로 조절
+            flame.style.width = '40vw'; // 불꽃 크기
+            flame.style.height = '40vw';
+
+            displayArea.appendChild(flame); // 불꽃을 화면에 추가
+
+            // 일정 시간이 지나면 불꽃 제거
+            setTimeout(() => {
+                displayArea.removeChild(flame); // 불꽃 삭제
+            }, 1000);
+
+            index++;
+        }, 200); // 글자를 200ms 간격으로 순차적으로 지움
     });
 
     textInput.addEventListener('keypress', (event) => {
